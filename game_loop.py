@@ -6,8 +6,8 @@ import keyboard as kb
 import cv2
 
 
-def game_loop(h, w, las_pieces=[], tick_delay=0.5, window_name='tretristre'):
-    if las_pieces == []:
+def game_loop(h, w, las_pieces=None, tick_delay=0.5, window_name='tretristre'):
+    if las_pieces is None:
         las_pieces = importar_las_pieces('./pieces')
         #las_pieces = [las_pieces[3]]
 
@@ -85,6 +85,8 @@ def game_loop(h, w, las_pieces=[], tick_delay=0.5, window_name='tretristre'):
                 break
             game_img = grille_to_image(grille_temp)
 
+            cv2.putText(game_img, org=(32, 32), text=str(score), fontFace=cv2.FONT_HERSHEY_PLAIN,
+                        fontScale=4, color=(255, 255, 255), thickness=2)
             cv2.imshow(window_name, game_img)
             cv2.waitKey(16)
 
